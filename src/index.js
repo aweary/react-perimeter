@@ -3,25 +3,32 @@ import React, { Component } from 'react'
 
 export default class Perimeter extends Component {
 
-
     constructor(props) {
         super(props);
         this.bounds = null;
+        this.breached = false;
     }
 
+    /**
+     * When the component mounts 
+     */
     componentDidMount() {
         this.bounds = this.node.getBoundingClientRect();
-        window.addEventListener('mousemove', this.handleMouseMove, eventListenerOptions);
-        window.addEventListener('resize', this.handleResize, eventListenerOptions);
+        window.addEventListener('mousemove', this.handleMouseMove);
+        window.addEventListener('resize', this.handleResize);
+        this.listening = true;
     }
 
     componentWillUnmount() {
-        this.removeEventListeners()
+        if (this.listening) {
+          this.removeEventListeners()
+        }
     }
 
     removeEventListeners() {
         window.removeEventListener('mousemove', this.handleMouseMove);
         window.removeEventListener('resize', this.handleResize);
+        this.listening = false;
     }
 
     handleResize = () => {
