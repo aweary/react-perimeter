@@ -4,7 +4,8 @@
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf lib && babel src --out-dir lib"
+    "build": "rimraf lib && babel src --out-dir lib",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
