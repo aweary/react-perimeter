@@ -1,0 +1,19 @@
+{
+  "name": "react-perimeter",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf lib && babel src --out-dir lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-preset-env": "^1.2.2",
+    "flow-bin": "^0.41.0",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.23.0"
+  }
+}
