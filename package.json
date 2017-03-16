@@ -11,10 +11,12 @@
     "babel-cli": "^6.24.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-preset-env": "^1.2.2",
+    "babel-preset-react": "^6.23.0",
     "flow-bin": "^0.41.0",
     "rimraf": "^2.6.1"
   },
-  "dependencies": {
-    "babel-preset-react": "^6.23.0"
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
