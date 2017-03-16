@@ -37,7 +37,7 @@ export default class Perimeter extends Component {
     }
 
     handleMouseMove = ({ clientX, clientY }) => {
-        const { buffer } = this.props;
+        const { buffer, onBreach, once } = this.props;
         const { top, right, bottom, left } = this.bounds;
         if (
             // Cursor is not too far left
@@ -49,18 +49,18 @@ export default class Perimeter extends Component {
             // Cursor is not too far down
             clientY < (bottom + buffer)
         ) {
-            this.handlePerimeterBreach();
+          if (this.breached) {
+            return
+          }
+          onBreach()
+          this.breached = true;
+          if (once) {
+            this.removeEventListeners()
+          }
+        } else {
+          this.breached = false;
         }
     }
-
-    handlePerimeterBreach = () => {
-        const { once, onBreach } = this.props;
-        onBreach();
-        if (once) {
-            this.removeEventListeners();
-        }
-    }
-
 
     render() {
         let { children } = this.props;
