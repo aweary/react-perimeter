@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { registerHandlers, unregisterHandlers } from './eventRegistration'
 
 // We listen to resize events too, but don't actually
 // use the event object so this is typed fine for now
@@ -62,8 +63,10 @@ export default class Perimeter extends Component {
     if (node) {
       this.bounds = node.getBoundingClientRect();
       this.initialOffset = window.pageYOffset;
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('resize', handleResize);
+      registerHandlers(this, {
+        onMouseMove: this.handleMouseMove,
+        onWindowResize: this.handleResize
+      })
       this.listening = true;
     }
   }
@@ -84,8 +87,7 @@ export default class Perimeter extends Component {
    * if the `once` prop is set to `true`
    */
   removeEventListeners() {
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('resize', this.handleResize);
+    unregisterHandlers(this)
     this.listening = false;
   }
 
@@ -113,7 +115,7 @@ export default class Perimeter extends Component {
     /**
      * There should be no situation where the `mousemove` handler
      * is called and `bounds` is not calculated, but flow demands
-     * this check since the initial property value is `null` 
+     * this check since the initial property value is `null`
      */
     if (!bounds) return;
     const offsetY = window.pageYOffset - initialOffset;
