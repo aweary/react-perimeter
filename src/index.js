@@ -96,6 +96,7 @@ export default class Perimeter extends Component {
    */
   handleResize = () => {
     if (this.node) {
+      this.initialOffset = window.pageYOffset;
       this.bounds = this.node.getBoundingClientRect();
     }
   }
@@ -113,7 +114,7 @@ export default class Perimeter extends Component {
     /**
      * There should be no situation where the `mousemove` handler
      * is called and `bounds` is not calculated, but flow demands
-     * this check since the initial property value is `null` 
+     * this check since the initial property value is `null`
      */
     if (!bounds) return;
     const offsetY = window.pageYOffset - initialOffset;
