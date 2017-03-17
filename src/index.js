@@ -17,6 +17,7 @@ export default class Perimeter extends Component {
   props: Props;
   node: null | HTMLElement;
   bounds: null | ClientRect;
+  initialOffset: number;
   breached: boolean;
   listening: boolean;
   constructor(props: Props) {
@@ -26,6 +27,10 @@ export default class Perimeter extends Component {
       this.node = null;
       // The result of calling getBoundingClientRect on this.node
       this.bounds = null;
+      // Initial pageYOffset, required since pages may be scrolled on load
+      // and getBoundingClientRect will take that into consideration when
+      // calculating the top offset
+      this.initialOffset = 0;
       // Whether the mouse is within the perimeter
       this.breached = false;
       // If we're still listening for mousemove/resize events
@@ -56,6 +61,7 @@ export default class Perimeter extends Component {
     const { handleMouseMove, handleResize, node } = this;
     if (node) {
       this.bounds = node.getBoundingClientRect();
+      this.initialOffset = window.pageYOffset;
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('resize', handleResize);
       this.listening = true;
@@ -102,10 +108,17 @@ export default class Perimeter extends Component {
    * and its not already breached (tracked on `this.breached`)
    * @param {MouseEvent} event mouse event
    */
-  handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
-    if (!this.bounds) return;
-    const { boundry, onBreach, once } = this.props;
-    const { top, right, bottom, left } = this.bounds;
+  handleMouseMove = ({ clientX, clientY } : MouseEvent) => {
+    const {initialOffset, props, bounds } = this;
+    /**
+     * There should be no situation where the `mousemove` handler
+     * is called and `bounds` is not calculated, but flow demands
+     * this check since the initial property value is `null` 
+     */
+    if (!bounds) return;
+    const offsetY = window.pageYOffset - initialOffset;
+    const { padding, onBreach, once } = props;
+    const { top, right, bottom, left } = bounds;
     if (
         // Cursor is not too far left
         clientX > (left - padding) &&
