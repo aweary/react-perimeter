@@ -1,11 +1,20 @@
 {
   "name": "react-perimeter",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
     "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aweary/react-perimeter.git"
+  },
+  "author": {
+    "name": "Brandon Dail",
+    "email": "brandon.dail@formidable.com",
+    "url": "https://www.twitter.com/aweary"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
