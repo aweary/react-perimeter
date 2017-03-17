@@ -1,4 +1,4 @@
-# react-perimeter
+# react-perimeter 🚧
 
 Create an invisible boundry around an element and respond when its breached.
 
