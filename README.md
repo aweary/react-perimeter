@@ -7,12 +7,12 @@ Create an invisible boundry around an element and respond when its breached.
 
 `react-perimeter` exports a single `Perimeter` component that will register a `mousemove` listener and calculate whether the current mouse position is within a boundry.
 
-The boundry will be calculated using `getBoundingClientRect` and the `boundries` prop, which lets you define "padding" for the boundry for each side of the target element.
+The boundry will be calculated using `getBoundingClientRect` and the `boundry` prop, which lets you define "padding" for the perimeter.
 
 ```jsx
 <Perimeter
   onBreach={this.prefetch}
-  boundries={[20, 10, 20, 10]}>
+  boundry={60}>
   <button onClick={this.fetch}>Load More</button>
 </Perimeter>
 ```
@@ -22,7 +22,7 @@ The boundry will be calculated using `getBoundingClientRect` and the `boundries`
 ```jsx
 <Perimeter
   onBreach={this.prefetch}
-  boundries={[20, 10, 20, 10]}>
+  boundry={60}>
   {ref => (
     <button
       ref={ref}
@@ -45,7 +45,7 @@ yarn add react-perimeter
 
 Property  	| 	Type		|	Default		|	  Description
 :-----------------------|:-----------------------------|:--------------|:--------------------------------
-`boundries` |   `number | Array<number>` | `undefined` | The boundries around the element. If a single number is passed it will be used for all sides. If an array is passed it should contain the boundry buffer for each side (`[top, right, bottom, left]`) 
+`boundry` |   `number` | `0` | The buffer around the element that defines the boundry of the perimeter
 `onBreach` | `() => void` | `undefined` | A callback to be invoked when the boundry is breached
 `once` | `boolean` | `false` | Whether the callback should only be invoked once (for example, when prefetching some data or chunks). If true all event listeners will be removed after `onBreach` is called.
 

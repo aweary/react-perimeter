@@ -1,6 +1,10 @@
 [ignore]
+.*/node_modules/.*
+.*/demo/.*
 
 [include]
+./src/*.js  
+
 
 [libs]
 

@@ -26,8 +26,8 @@ const Button = styled.button`
   }
 `;
 
-const PreloadLink = ({ to, children, preload, buffer }) => (
-  <Perimeter buffer={buffer} onBreach={preload}>
+const PreloadLink = ({ to, children, preload, boundry }) => (
+  <Perimeter  boundry={boundry} onBreach={preload.preload}>
     <Link to={to}>
       {children}
     </Link>
@@ -49,17 +49,17 @@ class App extends Component {
         <div>
           <ul>
              <li>
-              <PreloadLink to="/" preload={Home.preload} buffer={20}>
+              <PreloadLink to="/" preload={Home} boundry={100}>
                 Home
               </PreloadLink>
             </li>
             <li>
-              <PreloadLink to="/about" preload={About.preload} buffer={20}>
+              <PreloadLink to="/about" preload={About} boundry={100}>
                 About
               </PreloadLink>
             </li>
             <li>
-              <PreloadLink to="/topics" preload={About.preload} buffer={20}>
+              <PreloadLink to="/topics" preload={Topics} boundry={100}>
                 Topics
               </PreloadLink>
             </li>
