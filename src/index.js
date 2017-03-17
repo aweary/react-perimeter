@@ -62,10 +62,14 @@ export default class Perimeter extends Component {
         }
     }
 
+    attachRef = (node) => {
+      this.node = node
+    }
+
     render() {
         let { children } = this.props;
         if (typeof children === "function") {
-            return children(n => this.node = n)
+            return children(this.attachRef)
         }
         return <span ref={node => this.node = node}>{children}</span>
     }
