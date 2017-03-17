@@ -1,6 +1,6 @@
 {
   "name": "react-perimeter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -22,7 +22,8 @@
     "babel-preset-env": "^1.2.2",
     "babel-preset-react": "^6.23.0",
     "flow-bin": "^0.41.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "invariant": "^2.2.2"
   },
   "peerDependencies": {
     "react": "^15.4.2",
