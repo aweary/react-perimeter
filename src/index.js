@@ -3,9 +3,8 @@ import React, { Component } from 'react'
 
 type Props = {
   onBreach: () => void,
-  once: boolean,
-  boundry: number,
-  children: React$Element<*>
+  once?: boolean,
+  padding: number,
 };
 
 export default class Perimeter extends Component {
@@ -29,7 +28,7 @@ export default class Perimeter extends Component {
   static propTypes = {
     onBreach: React.PropTypes.func.isRequired,
     once: React.PropTypes.bool,
-    boundry: React.PropTypes.number.isRequired
+    padding: React.PropTypes.number.isRequired,
   }
 
   /**
@@ -84,7 +83,7 @@ export default class Perimeter extends Component {
    * Called on `mousemove`, using `clientX` and `clientY`
    * event properties to determine the position of the cursor.
    * The perimeter is then calculated from the ClientRect and the
-   * `boundry` prop. If the mouse is within the perimeter,
+   * `padding` prop. If the mouse is within the perimeter,
    * and its not already breached (tracked on `this.breached`)
    * @param {MouseEvent} event mouse event
    */
@@ -94,13 +93,13 @@ export default class Perimeter extends Component {
     const { top, right, bottom, left } = this.bounds;
     if (
         // Cursor is not too far left
-        clientX > (left - boundry) &&
+        clientX > (left - padding) &&
         // Cursor is not too far right
-        clientX < (right + boundry) &&
+        clientX < (right + padding) &&
         // Cursor is not too far up
-        clientY > (top - boundry) &&
+        clientY > ((top - offsetY) - padding) &&
         // Cursor is not too far down
-        clientY < (bottom + boundry)
+        clientY < ((bottom - offsetY) + padding)
     ) {
       if (this.breached) {
         return
