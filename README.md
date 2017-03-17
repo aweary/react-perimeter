@@ -43,9 +43,9 @@ yarn add react-perimeter
 
 ### Props
 
-	Property	|	Type		|	Default		|	Description
-:-----------------------|:--------------|:--------------|:--------------------------------
-boundries | `number | Array<number>` | `undefined` | The boundries around the element. If a single number is passed it will be used for all sides. If an array is passed it should contain the boundry buffer for each side (`[top, right, bottom, left]`) 
-onBreach | `() => void` | `undefined` | A callback to be invoked when the boundry is breached
-once | `boolean` | `false` | Whether the callback should only be invoked once (for example, when prefetching some data or chunks). If true all event listeners will be removed after `onBreach` is called.
+Property  	| 	Type		|	Default		|	  Description
+:-----------------------|:-----------------------------|:--------------|:--------------------------------
+`boundries` |   `number | Array<number>` | `undefined` | The boundries around the element. If a single number is passed it will be used for all sides. If an array is passed it should contain the boundry buffer for each side (`[top, right, bottom, left]`) 
+`onBreach` | `() => void` | `undefined` | A callback to be invoked when the boundry is breached
+`once` | `boolean` | `false` | Whether the callback should only be invoked once (for example, when prefetching some data or chunks). If true all event listeners will be removed after `onBreach` is called.
 
