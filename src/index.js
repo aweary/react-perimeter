@@ -1,10 +1,16 @@
 // @flow
 import React, { Component } from 'react'
 
+// We listen to resize events too, but don't actually
+// use the event object so this is typed fine for now
+type EventListener = (MouseEvent) => void;
+
 type Props = {
   onBreach: () => void,
   once?: boolean,
   padding: number,
+  mapListeners?: EventListener => EventListener,
+  children?: React$Element<*>
 };
 
 export default class Perimeter extends Component {
@@ -14,6 +20,7 @@ export default class Perimeter extends Component {
   breached: boolean;
   listening: boolean;
   constructor(props: Props) {
+    const { mapListeners } = props;
       super(props);
       // The HTML element used as the perimeter center
       this.node = null;
@@ -23,12 +30,20 @@ export default class Perimeter extends Component {
       this.breached = false;
       // If we're still listening for mousemove/resize events
       this.listening = false;
+      // If a mapListeners function is provided, update the instance event
+      // handlers to be the returned mapped versions. Common use case would be
+      // debounced or throttled listeners.
+      if (mapListeners) {
+        this.handleMouseMove = mapListeners(this.handleMouseMove);
+        this.handleResize = mapListeners(this.handleResize);
+      }
   }
 
   static propTypes = {
     onBreach: React.PropTypes.func.isRequired,
     once: React.PropTypes.bool,
     padding: React.PropTypes.number.isRequired,
+    mapListeners: React.PropTypes.func
   }
 
   /**
