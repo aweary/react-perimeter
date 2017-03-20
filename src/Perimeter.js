@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 // We listen to resize events too, but don't actually
 // use the event object so this is typed fine for now
@@ -9,7 +9,7 @@ type Props = {
   onBreach: () => void,
   once?: boolean,
   padding: number,
-  mapListeners?: (EventListener) => EventListener,
+  mapListeners?: EventListener => EventListener,
   children?: React$Element<*>
 };
 
@@ -45,15 +45,16 @@ export default class Perimeter extends Component {
   }
 
   static propTypes = {
-    onBreach: PropTypes.func.isRequired,
-    once: PropTypes.bool,
-    padding: PropTypes.number.isRequired,
-    mapListeners: PropTypes.func
-  };
+    onBreach: React.PropTypes.func.isRequired,
+    once: React.PropTypes.bool,
+    padding: React.PropTypes.number.isRequired,
+    mapListeners: React.PropTypes.func
+  }
 
   static contextTypes = {
     mouseMove: PropTypes.shape({
       subscribe: PropTypes.func.isRequired,
+      unsubscribe: PropTypes.func.isRequired
     })
   };
 
@@ -65,11 +66,12 @@ export default class Perimeter extends Component {
    */
   componentDidMount() {
     const { handleMouseMove, handleResize, node } = this;
+    const { mouseMove } = this.context;
     if (node) {
       this.bounds = node.getBoundingClientRect();
       this.initialOffset = window.pageYOffset;
-      if(this.context && this.context.mouseMove && this.context.mouseMove.subscribe){
-        this.mouseMoveUnsub = this.context.mouseMove.subscribe(handleMouseMove)
+      if(mouseMove && mouseMove.subscribe){
+        mouseMove.subscribe(handleMouseMove);
       } else {
         window.addEventListener('mousemove', handleMouseMove);
       }
@@ -84,7 +86,7 @@ export default class Perimeter extends Component {
    */
   componentWillUnmount() {
     if (this.listening) {
-      this.removeEventListeners();
+      this.removeEventListeners()
     }
   }
 
@@ -94,8 +96,9 @@ export default class Perimeter extends Component {
    * if the `once` prop is set to `true`
    */
   removeEventListeners() {
-    if(this.mouseMoveUnsub && this.context && this.context.mouseMove && this.context.mouseMove.subscribe){
-      this.mouseMoveUnsub()
+    const { mouseMove } = this.context;
+    if(mouseMove && mouseMove.unsubscribe){
+      mouseMove.unsubscribe(this.handleMouseMove);
     } else {
       window.removeEventListener('mousemove', this.handleMouseMove);
     }
@@ -110,9 +113,10 @@ export default class Perimeter extends Component {
    */
   handleResize = () => {
     if (this.node) {
+      this.initialOffset = window.pageYOffset;
       this.bounds = this.node.getBoundingClientRect();
     }
-  };
+  }
 
   /**
    * Called on `mousemove`, using `clientX` and `clientY`
@@ -122,8 +126,8 @@ export default class Perimeter extends Component {
    * and its not already breached (tracked on `this.breached`)
    * @param {MouseEvent} event mouse event
    */
-  handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
-    const { initialOffset, props, bounds } = this;
+  handleMouseMove = ({ clientX, clientY } : MouseEvent) => {
+    const {initialOffset, props, bounds } = this;
     /**
      * There should be no situation where the `mousemove` handler
      * is called and `bounds` is not calculated, but flow demands
@@ -135,26 +139,26 @@ export default class Perimeter extends Component {
     const { top, right, bottom, left } = bounds;
     if (
       // Cursor is not too far left
-      clientX > left - padding &&
-      // Cursor is not too far right
-      clientX < right + padding &&
-      // Cursor is not too far up
-      clientY > top - offsetY - padding &&
-      // Cursor is not too far down
-      clientY < bottom - offsetY + padding
+    clientX > (left - padding) &&
+    // Cursor is not too far right
+    clientX < (right + padding) &&
+    // Cursor is not too far up
+    clientY > ((top - offsetY) - padding) &&
+    // Cursor is not too far down
+    clientY < ((bottom - offsetY) + padding)
     ) {
       if (this.breached) {
-        return;
+        return
       }
-      onBreach();
+      onBreach()
       this.breached = true;
       if (once) {
-        this.removeEventListeners();
+        this.removeEventListeners()
       }
     } else {
       this.breached = false;
     }
-  };
+  }
 
   /**
    * Ref callback used to populate this.node. If
@@ -164,11 +168,13 @@ export default class Perimeter extends Component {
    * Otherwise the default `span` is rendered and populated.
    */
   attachRef = (node: HTMLElement) => {
-    this.node = node;
-  };
+    this.node = node
+  }
 
   render() {
     const { children } = this.props;
-    return typeof children === 'function' ? children(this.attachRef) : <span ref={this.attachRef}>{children}</span>;
+    return typeof children === 'function'
+      ? children(this.attachRef)
+      : <span ref={this.attachRef}>{children}</span>
   }
 }

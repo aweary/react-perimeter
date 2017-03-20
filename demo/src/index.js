@@ -27,7 +27,7 @@ const Button = styled.button`
 `;
 
 const PreloadLink = ({ to, children, preload, boundry }) => (
-  <Perimeter padding={20}  boundry={boundry} onBreach={preload.preload}>
+  <Perimeter once padding={20}  boundry={boundry} onBreach={preload.preload}>
     <Link to={to}>
       {children}
     </Link>

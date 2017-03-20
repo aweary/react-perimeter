@@ -1,8 +1,2 @@
-import Perimiter from './Perimeter';
-import MouseMoveProvider from './MouseMoveProvider';
-
-export {
-  Perimiter,
-  MouseMoveProvider
-};
-export default Perimiter;
+export {default as MouseMoveProvider} from './MouseMoveProvider';
+export {default} from './Perimeter';
