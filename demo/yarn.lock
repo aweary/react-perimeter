@@ -2502,6 +2502,10 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-listener-provider@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-listener-provider/-/react-listener-provider-0.1.2.tgz#40338f198800f8991a8d9284f5617dffe51aebc1"
+
 react-loadable@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-3.0.1.tgz#d285d0f32680fef3cf7c1fd8853206415f824ad8"

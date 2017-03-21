@@ -1,6 +1,6 @@
 {
   "name": "react-perimeter-demo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A demo application using react-perimeter",
   "main": "index.js",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "react-router-dom": "^4.0.0",
     "react-spinner": "^0.2.6",
     "styled-components": "^1.4.4",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "react-listener-provider": "^0.1.2"
   }
 }

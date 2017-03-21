@@ -51,6 +51,13 @@ export default class Perimeter extends Component {
     mapListeners: React.PropTypes.func
   }
 
+  static contextTypes = {
+    listener: React.PropTypes.shape({
+      add: React.PropTypes.func.isRequired,
+      remove: React.PropTypes.func.isRequired
+    })
+  }
+
   /**
    * When the component mounts we calculate the ClientRect
    * for the target node and attach event listeners for:
@@ -59,11 +66,17 @@ export default class Perimeter extends Component {
    */
   componentDidMount() {
     const { handleMouseMove, handleResize, node } = this;
+    const { listener } = this.context;
     if (node) {
       this.bounds = node.getBoundingClientRect();
       this.initialOffset = window.pageYOffset;
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('resize', handleResize);
+      if(listener) {
+        listener.add('mousemove', handleMouseMove);
+        listener.add('resize', handleResize);
+      } else {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('resize', handleResize);
+      }
       this.listening = true;
     }
   }
@@ -84,8 +97,14 @@ export default class Perimeter extends Component {
    * if the `once` prop is set to `true`
    */
   removeEventListeners() {
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('resize', this.handleResize);
+    const { listener } = this.context;
+    if(listener){
+      listener.remove('mousemove', handleMouseMove);
+      listener.remove('resize', handleResize);
+    } else {
+      window.removeEventListener('mousemove', this.handleMouseMove);
+      window.removeEventListener('resize', this.handleResize);
+    }
     this.listening = false;
   }
 
