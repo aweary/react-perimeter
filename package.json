@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,12 @@
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-preset-env": "^1.2.2",
     "babel-preset-react": "^6.23.0",
+    "enzyme": "^2.7.1",
     "flow-bin": "^0.41.0",
+    "jest": "^19.0.2",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
     "rimraf": "^2.6.1"
   },
   "peerDependencies": {
