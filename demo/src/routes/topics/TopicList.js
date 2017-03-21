@@ -11,7 +11,7 @@ const topics = [
 
 const TopicList = () => (
   <ol>
-    {topics.map(topic => <li>{topic}</li>)}
+    {topics.map(topic => <li key={topic}>{topic}</li>)}
   </ol>
 );
 
