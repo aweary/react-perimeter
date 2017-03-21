@@ -70,7 +70,7 @@ export default class Perimeter extends Component {
     if (node) {
       this.bounds = node.getBoundingClientRect();
       this.initialOffset = window.pageYOffset;
-      if(listener) {
+      if( listener ) {
         listener.add('mousemove', handleMouseMove);
         listener.add('resize', handleResize);
       } else {
@@ -98,7 +98,7 @@ export default class Perimeter extends Component {
    */
   removeEventListeners() {
     const { listener } = this.context;
-    if(listener){
+    if( listener ){
       listener.remove('mousemove', handleMouseMove);
       listener.remove('resize', handleResize);
     } else {
