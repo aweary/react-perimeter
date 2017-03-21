@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ReactListenerProvider from 'react-listener-provider';
 import Home from "./routes/home";
 import About from "./routes/about";
 import Topics from "./routes/topics";
@@ -45,31 +46,33 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <ul>
-             <li>
-              <PreloadLink to="/" preload={Home} boundry={100}>
-                Home
-              </PreloadLink>
-            </li>
-            <li>
-              <PreloadLink to="/about" preload={About} boundry={100}>
-                About
-              </PreloadLink>
-            </li>
-            <li>
-              <PreloadLink to="/topics" preload={Topics} boundry={100}>
-                Topics
-              </PreloadLink>
-            </li>
-          </ul>
-          <hr />
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
-        </div>
-      </Router>
+      <ReactListenerProvider>
+        <Router>
+          <div>
+            <ul>
+              <li>
+                <PreloadLink to="/" preload={Home} boundry={100}>
+                  Home
+                </PreloadLink>
+              </li>
+              <li>
+                <PreloadLink to="/about" preload={About} boundry={100}>
+                  About
+                </PreloadLink>
+              </li>
+              <li>
+                <PreloadLink to="/topics" preload={Topics} boundry={100}>
+                  Topics
+                </PreloadLink>
+              </li>
+            </ul>
+            <hr />
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/topics" component={Topics} />
+          </div>
+        </Router>
+      </ReactListenerProvider>
     );
   }
 }

@@ -61,6 +61,25 @@ You may want to debounce or throttle the `mousemove` and `resize` event listener
 By letting you provide the mapped listener yourself, `react-perimeter` gives you full control over what debounce/throttle imeplementation you wish to use and its paramaters.
 
 
+### Deduping Event Listeners
+
+If you use `react-perimeter` in multiple places in your application you may want to dedupe the internal event listeners.
+ 
+`react-perimiter` integrates with [react-listener-provider](https://github.com/jnsdls/react-listener-provider) to make deduping easy.
+ Simply `yarn add react-listener-provider` and wrap your application like this:
+ 
+ ```jsx
+ import ReactListenerProvider from 'react-listener-provider;
+ <ReactListenerProvider>
+    <YourApp>
+        <Perimeter />
+    </YourApp>
+ </ReactListenerProvider>
+ ```
+ 
+ Any `<Perimeter>` component you use inside of `<ReactListenerProvider>` will automatically use the global event listener provided by `react-listener-provider` instead of registering its own.
+
+
 ### Prefetching or Preloading
 
 `react-perimeter` shines especially bright when used to prefetch or preload other components. Here is a small example that uses [`react-loadable`](https://github.com/thejameskyle/react-loadable) and [`react-router`](https://github.com/ReactTraining/react-router) to preload a route chunk when the cursor gets near a link:

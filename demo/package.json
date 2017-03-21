@@ -25,6 +25,8 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "react-spinner": "^0.2.6",
-    "styled-components": "^1.4.4"
+    "styled-components": "^1.4.4",
+    "webpack-dev-server": "^2.4.2",
+    "react-listener-provider": "^0.1.2"
   }
 }

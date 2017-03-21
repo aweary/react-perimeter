@@ -27,5 +27,8 @@
   "peerDependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
+  },
+  "optionalDependencies": {
+    "react-listener-provider": "^0.1.2"
   }
 }
