@@ -99,8 +99,8 @@ export default class Perimeter extends Component {
   removeEventListeners() {
     const { listener } = this.context;
     if( listener ){
-      listener.remove('mousemove', handleMouseMove);
-      listener.remove('resize', handleResize);
+      listener.remove('mousemove', this.handleMouseMove);
+      listener.remove('resize', this.handleResize);
     } else {
       window.removeEventListener('mousemove', this.handleMouseMove);
       window.removeEventListener('resize', this.handleResize);
