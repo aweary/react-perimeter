@@ -69,7 +69,7 @@ If you use `react-perimeter` in multiple places in your application you may want
  Simply `yarn add react-listener-provider` and wrap your application like this:
  
  ```jsx
- import ReactListenerProvider from 'react-listener-provider;
+ import ReactListenerProvider from 'react-listener-provider';
  <ReactListenerProvider>
     <YourApp>
         <Perimeter />
