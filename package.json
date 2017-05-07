@@ -35,6 +35,6 @@
     "react-dom": "^15.4.2"
   },
   "optionalDependencies": {
-    "react-listener-provider": "^0.1.2"
+    "react-listener-provider": "^0.2.0"
   }
 }
