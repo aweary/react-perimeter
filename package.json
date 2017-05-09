@@ -32,9 +32,10 @@
   },
   "peerDependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "prop-types": "^15.5.8"
   },
   "optionalDependencies": {
-    "react-listener-provider": "^0.1.2"
+    "react-listener-provider": "^0.2.0"
   }
 }

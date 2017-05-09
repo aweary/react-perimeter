@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 import Perimeter from '../../../src';
-import Loader from 'halogen/PulseLoader';
 
 const AsyncTopicsList = Loadable({
   loader: () => System.import('./TopicList.js'),
-  LoadingComponent: Loader
-})
+  LoadingComponent: () => <div>Loading...</div>
+});
 
 class Topics extends Component {
   constructor() {
     super();
     this.state = {
-      load: false,
-    }
+      load: false
+    };
   }
 
   render() {
@@ -22,7 +21,7 @@ class Topics extends Component {
         <h1>Topics</h1>
         <AsyncTopicsList />
       </div>
-    )
+    );
   }
 }
 

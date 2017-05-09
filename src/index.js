@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // We listen to resize events too, but don't actually
 // use the event object so this is typed fine for now
@@ -45,16 +46,16 @@ export default class Perimeter extends Component {
   }
 
   static propTypes = {
-    onBreach: React.PropTypes.func.isRequired,
-    once: React.PropTypes.bool,
-    padding: React.PropTypes.number.isRequired,
-    mapListeners: React.PropTypes.func
+    onBreach: PropTypes.func.isRequired,
+    once: PropTypes.bool,
+    padding: PropTypes.number.isRequired,
+    mapListeners: PropTypes.func
   }
 
   static contextTypes = {
-    listener: React.PropTypes.shape({
-      add: React.PropTypes.func.isRequired,
-      remove: React.PropTypes.func.isRequired
+    listener: PropTypes.shape({
+      add: PropTypes.func.isRequired,
+      remove: PropTypes.func.isRequired
     })
   }
 
