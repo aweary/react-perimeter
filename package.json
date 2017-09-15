@@ -1,6 +1,6 @@
 {
   "name": "react-perimeter",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -31,9 +31,9 @@
     "rimraf": "^2.6.1"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.8",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "prop-types": "^15.5.8"
+    "react-dom": "^15.4.2"
   },
   "optionalDependencies": {
     "react-listener-provider": "^0.2.0"
