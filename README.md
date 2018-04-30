@@ -47,6 +47,7 @@ Property  	| 	Type		|	Default		|	  Description
 :-----------------------|:-----------------------------|:--------------|:--------------------------------
 `padding` |   `number` | `0` | The buffer around the element that defines the padding of the perimeter
 `onBreach` | `() => void` | `undefined` | A callback to be invoked when the perimeter is breached
+`onLeave` | `() => void` | `undefined` | A callback to be invoked when the the mouse has left the perimeter
 `once` | `boolean` | `false` | Whether the callback should only be invoked once (for example, when prefetching some data or chunks). If true all event listeners will be removed after `onBreach` is called.
 `mapListeners` | `EventListener => EventListener` | `undefined` | If provided, each event listeners (`resize`, `mousemove`) will be passed in, and the returned function will be used instead.
 

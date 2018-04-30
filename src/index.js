@@ -8,6 +8,7 @@ type EventListener = (MouseEvent) => void;
 
 type Props = {
   onBreach: () => void,
+  onLeave: () => void,
   once?: boolean,
   padding: number,
   mapListeners?: EventListener => EventListener,
@@ -138,7 +139,7 @@ export default class Perimeter extends Component {
      */
     if (!bounds) return;
     const offsetY = window.pageYOffset - initialOffset;
-    const { padding, onBreach, once } = props;
+    const { padding, onBreach, onLeave, once } = props;
     const { top, right, bottom, left } = bounds;
     if (
         // Cursor is not too far left
@@ -159,6 +160,9 @@ export default class Perimeter extends Component {
         this.removeEventListeners()
       }
     } else {
+      if (this.breached) {
+        onLeave();
+      }
       this.breached = false;
     }
   }
